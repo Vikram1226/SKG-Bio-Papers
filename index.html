@@ -3213,7 +3213,7 @@
                   <polyline points="22,6 12,13 2,6" />
                 </svg></div>
               <div class="ic-bd">
-                <h4>Contact</h4><a href="mailto:skgbiopapers@gmail.com">skgbiopapers@gmail.com</a><a
+                <h4>Contact</h4><a href="/cdn-cgi/l/email-protection#4d3e262a2f24223d2c3d283f3e0d2a202c2421632e2220"><span class="__cf_email__" data-cfemail="01726a6663686e71607164737241666c60686d2f626e6c">[email&#160;protected]</span></a><a
                   href="tel:+918110055959">+91 81100 55959</a><a href="tel:+918072145911">+91 80721 45911</a>
               </div>
             </div>
@@ -3239,7 +3239,7 @@
   <!-- SCROLL TOP -->
   <button id="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Top">↑</button>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     window.go = function (p) {
       if (!p) return;
       console.log('SPA Switch:', p);
@@ -3574,19 +3574,37 @@
     window.sendMsg = sendMsg;
     window.handleDrop = handleDrop;
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initApp);
-    } else {
-      initApp();
+    // Handle URL hash navigation (#home, #about, #products, #cert, #contact)
+    function handleHash() {
+      const hash = window.location.hash.replace('#', '');
+      const validPages = ['home', 'about', 'products', 'cert', 'contact'];
+      if (hash && validPages.includes(hash)) {
+        window.go(hash);
+      }
     }
 
-    // Fallback: force animations visible after 1.5s
-    setTimeout(function () {
-      document.querySelectorAll('.ao.init').forEach(function (el) {
-        el.classList.add('in'); el.classList.remove('init');
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        initApp();
+        handleHash();
       });
-    }, 1500);
-  </script>
-</body>
+    } else {
+      initApp();
+      handleHash();
+    }
 
-</html>
+    // Also update URL hash when navigating (optional but useful for sharing)
+    const _origGo = window.go;
+    window.go = function(p) {
+      _origGo(p);
+      if (history.pushState) {
+        history.pushState(null, null, '#' + p);
+      }
+    };
+
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', function() {
+      handleHash();
+    });
+
+    // Fallbac
