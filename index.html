@@ -3580,6 +3580,24 @@
       initApp();
     }
 
+    // Handle URL hash - direct link support
+const _origGo = window.go;
+window.go = function(p) {
+  _origGo(p);
+  if (history.pushState) history.pushState(null, null, '#' + p);
+};
+function handleHash() {
+  const h = window.location.hash.replace('#','');
+  if (['home','about','products','cert','contact'].includes(h)) window.go(h);
+}
+window.addEventListener('popstate', handleHash);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function(){ initApp(); setTimeout(handleHash,100); });
+} else {
+  initApp();
+  setTimeout(handleHash, 100);
+}
+
     // Fallback: force animations visible after 1.5s
     setTimeout(function () {
       document.querySelectorAll('.ao.init').forEach(function (el) {
