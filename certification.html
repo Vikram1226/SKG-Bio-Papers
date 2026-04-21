@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKG Bio Papers - Certification</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body data-page="certification" data-module="certification">
+  <div id="site-header"></div>
+
+  <main>
+    <div class="banner">
+      <div class="bleaf">Cert</div>
+      <div class="b-float" style="top:10%;left:5%;animation:floatUp 20s infinite">ISO</div>
+      <div class="b-float" style="top:70%;left:20%;animation:floatUp 16s infinite 3s">CPCB</div>
+      <div class="banner-grid">
+        <div class="banner-content banner-in ao">
+          <h1>Certification</h1>
+          <div class="bc"><a class="bh" href="index.html">Home</a><span class="bs">&gt;</span><span
+              class="bc2">Certification</span></div>
+        </div>
+        <div class="banner-graphic ao fr">
+          <img src="Image/cert_banner.png" alt="Official Certification">
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-bar">
+      <button class="admin-tog" id="aTogBtn" type="button">Admin Panel</button>
+    </div>
+
+    <div id="aPanel">
+      <div class="a-login" id="aLogin">
+        <div class="a-login-box">
+          <div class="a-icon">Admin</div>
+          <h2>Admin Login</h2>
+          <p>Enter credentials to manage certifications.</p>
+          <div class="afield"><label>Username</label><input id="aUser" type="text" placeholder="admin"></div>
+          <div class="afield"><label>Password</label><input id="aPass" type="password" placeholder="password"></div>
+          <div class="a-err" id="aErr">Wrong credentials. Try again.</div>
+          <button class="a-login-btn" id="loginBtn" type="button">Login</button>
+        </div>
+      </div>
+
+      <div class="a-dash" id="aDash">
+        <div class="a-dash-inner">
+          <div class="a-hdr">
+            <div>
+              <h2>Certification Manager</h2>
+              <p>Add, view and delete certifications</p>
+            </div>
+            <button class="a-logout" id="logoutBtn" type="button">Logout</button>
+          </div>
+          <div class="a-stats">
+            <div class="a-stat">
+              <div class="snum" id="sTot">0</div>
+              <div class="slbl">Total Certificates</div>
+            </div>
+            <div class="a-stat hl">
+              <div class="snum">OK</div>
+              <div class="slbl">Verification Ready</div>
+            </div>
+            <div class="a-stat">
+              <div class="snum">ISO</div>
+              <div class="slbl">17088 Compliant</div>
+            </div>
+          </div>
+
+          <div class="a-form-card">
+            <h3>Add New Certificate</h3>
+            <div class="a-div"></div>
+            <div class="af-grid">
+              <div class="af-field"><label>Certificate Title</label><input id="cTitle" type="text"
+                  placeholder="e.g. ISO 17088 Certificate"></div>
+              <div class="af-field"><label>Issued By</label><input id="cIssuer" type="text"
+                  placeholder="e.g. CPCB India"></div>
+            </div>
+            <div class="af-grid" style="margin-bottom:16px">
+              <div class="af-field"><label>Issue Date</label><input id="cDate" type="date"></div>
+              <div class="af-field"><label>Expiry Date</label><input id="cExpiry" type="date"></div>
+            </div>
+            <div class="drop-zone" id="dropZ">
+              <div class="dico" id="dIco">IMG</div>
+              <div class="dtxt" id="dTxt">Click or drag &amp; drop certificate image/PDF</div>
+              <div class="dsubt">JPG, PNG, PDF supported</div>
+              <input id="cImg" type="file" accept="image/*,application/pdf" style="display:none">
+            </div>
+            <div class="img-prev-wrap" id="iPrev">
+              <img id="iSrc"
+                style="width:100%;max-height:220px;object-fit:contain;border-radius:12px;border:1.5px solid var(--border)"
+                alt="Preview">
+              <div id="pdfPrev" class="pdf-prev-box"><span>PDF</span>
+                <p>PDF Document Selected</p>
+              </div>
+              <button class="img-prev-del" id="clearImgBtn" type="button">X</button>
+            </div>
+            <button class="a-add-btn" id="addCertBtn" type="button">Add Certificate</button>
+            <div class="a-suc" id="aSuc">Certificate added successfully.</div>
+          </div>
+
+          <div class="a-list-card">
+            <h3>Manage Certificates</h3>
+            <div class="a-div"></div>
+            <div id="aList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="sec" id="pubSec">
+      <div class="wrap">
+        <div class="tc ao"><span class="sec-lbl">Our Credentials</span>
+          <h2 class="sec-ttl">Certifications</h2>
+          <div class="sec-line"></div>
+          <p class="sec-desc" style="margin-top:14px">Our products are certified by leading authorities, ensuring they
+            meet high standards for compostability and environmental safety.</p>
+        </div>
+        <div class="cert-grid" id="pubGrid"></div>
+      </div>
+    </section>
+
+    <div id="lb">
+      <div class="lb-box" onclick="event.stopPropagation()">
+        <div id="lbMediaContainer" style="display:contents"></div>
+        <div id="lb-cap"></div>
+        <button class="lb-cls" type="button">X</button>
+      </div>
+    </div>
+
+    <section class="module-cta">
+      <div class="module-cta-card ao sc">
+        <span class="module-pill">Certification Module Contact</span>
+        <h2>Need certificate access, compliance clarification, or document support?</h2>
+        <p>The certification module now has a separate contact page, so compliance-related questions can go to a focused
+          route instead of mixing with general sales enquiries.</p>
+        <div class="module-cta-actions">
+          <a class="hero-btn" href="contact-certification.html">Open Certification Contact Page <span
+              class="arr">&rarr;</span></a>
+        </div>
+        <p class="module-cta-note">Use this route for document requests, certification validation, and compliance
+          questions.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+
+</html>
